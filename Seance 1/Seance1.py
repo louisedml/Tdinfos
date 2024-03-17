@@ -1,33 +1,39 @@
 #EXO 1
 import copy
 tirage=['a','r','b','g','e','s','c','j']
-def pluslongmot(tirage):
+def scrabble(tirage):
     f=open("frenchssaccent.dic",'r')
     lexique=[]
     for ligne in f: #On convertit en liste
         lexique.append(ligne[0:len(ligne)-1])
     f.close()
-    mots=[]
+    motssansjoker=[]
+    motsavecjoker=[]
     for L in lexique: #On parcourt les mots qui sont dans la liste
         copie=copy.deepcopy(tirage)
         a=1
         joker=0 #Compteur des jokers utilisés
-        for x in L: #Pour chaque mot, on parcourt les lettres qui le compose
+        mot=''
+        for x in L:#Pour chaque mot, on parcourt les lettres qui le compose
             if x in copie:
-                copie.remove(x) #si la lettre est dans notre tirage, on la retire car on ne peut plus la réutiliser
+                copie.remove(x)#si la lettre est dans notre tirage, on la retire car on ne peut plus la réutiliser
+                mot=mot+x
             elif '?' in copie and joker==0: #si on a au moins un joker et qu'on en a utilisé aucun
                 joker=joker+1
                 copie.remove('?')
+                mot=mot+'?'
             else:
                 a=0 #si la lettre n'y est pas on change la valeur de a, de sorte que le mot ne puisse pas être pris
         if a==1:
-            mots.append(L)
-    mots.sort(key=len)
+            motsavecjoker.append(mot) #liste de mots écrite avec le joker quand il est utilisé
+            motssansjoker.append(L) #même liste mais le joker est remplacé par la lettre réelle
     points=[]
-    for m in mots:
+    for m in motsavecjoker: #On compte les points à partir de la liste des mots qui ont potentiellement un joker
         points.append(score(m))
         maximum=max(points)
-    return 'plus long mot:', mots[-1], 'maximum de points:', maximum, 'avec ce mot:', mots[points.index(maximum)] #la fonction retourne le mot le plus long , le maximum de points et le mot associé
+    motscore=motssansjoker[points.index(maximum)] #On donne le mot correspondant au score max dans la liste des mots écrit sans le joker 
+    motssansjoker.sort(key=len,reverse=True)
+    return 'plus long mot:', motssansjoker[0], 'maximum de points:', maximum, 'avec ce mot:', motscore #la fonction retourne le mot le plus long , le maximum de points et le mot associé
 
 #EXO 3
 
@@ -40,3 +46,6 @@ def score(mot):
         
 #EXO 4
 liste=['z','x','c','v','r','r','t','?']
+
+print(scrabble(tirage))
+print(scrabble(liste))
