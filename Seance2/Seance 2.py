@@ -59,7 +59,7 @@ print(leibnitz(1000))
 #exercice 5
 
 class polynomial:
-    """Retourne un polynôme à partir d'une liste de coefficients"""
+    """Classe permettant de manipuler des polynômes"""
     def __init__(self,L):
         self.coeff=L
     def __str__(self):
@@ -77,15 +77,15 @@ class polynomial:
                 P=P+f"{self.coeff[k]}*X**{k}+"
         P=P+f"{self.coeff[len(self.coeff)-1]}*X**{len(self.coeff)-1})"
         return P
-    def add(self,self2):
+    def add(self,other):
         """Prend en argument un deuxième polynôme et renvoit la somme des deux"""
-        m=min(len(self.coeff),len(self2.coeff))
+        m=min(len(self.coeff),len(other.coeff))
         L=[]
         for k in range(m):
-            L=L+[self.coeff[k]+self2.coeff[k]]
-        if len(self2.coeff)>m:
-            for k in range(m+1, len(self2.coeff)-1):
-                L=L+[self2.coeff[k]]
+            L=L+[self.coeff[k]+other.coeff[k]]
+        if len(other.coeff)>m:
+            for k in range(m+1, len(other.coeff)-1):
+                L=L+[other.coeff[k]]
         elif len(self.coeff)>m:
             for k in range(m+1, len(self.coeff)-1):
                 L=L+[self.coeff[k]]

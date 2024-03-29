@@ -55,7 +55,6 @@ class Tree:
         else:
             return False
         
-        
     def __str__(self):
         if self._children:
             children_str = ', '.join(str(child) for child in self._children)
@@ -79,8 +78,7 @@ class Tree:
             v=self._children[1]
             ud=u.deriv(var)
             vd=v.deriv(var)
-            return Tree('+', Tree('*', ud, v), Tree('*', u, vd))
-        
+            return Tree('+', Tree('*', ud, v), Tree('*', u, vd))     
         
 if __name__=='__main__':
     f=Tree('f',Tree('a'),Tree('b'))
