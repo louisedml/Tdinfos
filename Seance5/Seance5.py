@@ -3,24 +3,18 @@ from random import *
 
 
 def score(x,y):
-    if (x-200)**2+(y-200)**2<=165**2:
-        if (x-200)**2+(y-200)**2<=135**2:
-            if (x-200)**2+(y-200)**2<=105**2:
-                if (x-200)**2+(y-200)**2<=75**2:
-                    if (x-200)**2+(y-200)**2<=35**2:
-                        if (x-200)**2+(y-200)**2<=15**2:
-                            return 6
-                        else:
-                            return 5
-                    else:
-                        return 4
-                else:
-                    return 3
-            else:
-                return 2
-        else:
-            return 1
-            
+    if (x-200)**2+(y-200)**2<=15**2:
+        return 6
+    elif (x-200)**2+(y-200)**2<=35**2:
+        return 5
+    elif (x-200)**2+(y-200)**2<=75**2:
+        return 4
+    elif (x-200)**2+(y-200)**2<=105**2:
+        return 3
+    elif (x-200)**2+(y-200)**2<=135**2:
+        return 2
+    elif (x-200)**2+(y-200)**2<=165**2:
+        return 1
     else:
         return 0
     
